@@ -29,6 +29,9 @@ public class Cliente implements Serializable {
     @NotEmpty
     private String cpf;
 
+    private Date dataNascimento;
+
+//    Transient
     @Transient
     private Endereco endereco;
 

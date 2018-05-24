@@ -23,6 +23,7 @@ public class CadastroClienteBuilder {
         cliente.setNome(objetoDTO.getClienteDTO().getNome());
         cliente.setSobrenome(objetoDTO.getClienteDTO().getSobrenome());
         cliente.setCpf(objetoDTO.getClienteDTO().getCpf());
+        cliente.setDataNascimento(objetoDTO.getClienteDTO().getDataNascimento());
         clienteRepository.save(cliente);
 
         Endereco endereco = new Endereco();
