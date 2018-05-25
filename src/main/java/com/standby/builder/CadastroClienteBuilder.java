@@ -36,6 +36,12 @@ public class CadastroClienteBuilder {
 
         Contato contato = new Contato();
         contato.setNumero(objetoDTO.getContatoDTO().getNumero());
+        if (objetoDTO.getContatoDTO().getFalarCom() == null) {
+            contato.setFalarCom(objetoDTO.getClienteDTO().getNome());
+        } else {
+            contato.setFalarCom(objetoDTO.getContatoDTO().getFalarCom());
+        }
+
         contato.setCliente(cliente);
         contatoRepository.save(contato);
 
