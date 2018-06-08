@@ -31,4 +31,10 @@ public class ServicoService {
         return servicos;
     }
 
+    public List<Servico> receber () {
+        List<Servico> servicos = servicoRepository.findAllByPagoAndStatus(false, "CONCLUÍDO");
+
+        return servicos;
+    }
+
 }

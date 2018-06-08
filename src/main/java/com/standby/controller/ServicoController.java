@@ -34,6 +34,11 @@ public class ServicoController extends AbstractRestController {
         return ResponseRest.list(service.listaCompleta());
     }
 
+    @GetMapping("/receber")
+    public ResponseEntity<?> receber() {
+        return ResponseRest.list(service.receber());
+    }
+
     @PostMapping
     public ResponseEntity<?> cadastro(@RequestBody ServicoDTO dto) {
         return ResponseRest.object(builder.build(new Servico(), dto));

@@ -9,4 +9,7 @@ import java.util.List;
 public interface ServicoRepository extends JpaRepository<Servico, Long>{
 
     List<Servico> findByCliente (Cliente cliente);
+    List<Servico> findAllByPagoAndStatus (Boolean condicao, String status);
+    List<Servico> findAllByPago (Boolean condicao);
+    List<Servico> findAllByStatus (String status);
 }
