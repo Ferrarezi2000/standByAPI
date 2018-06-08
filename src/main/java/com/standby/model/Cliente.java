@@ -31,29 +31,14 @@ public class Cliente implements Serializable {
 
     private Date dataNascimento;
 
-//    Transient
     @Transient
     private Endereco endereco;
 
     @Transient
     private List<Contato> contatos;
 
-//    lista completa endereço
     @Transient
-    private String enderecoLogradouro;
+    private List<Servico> servicos;
 
-    @Transient
-    private String enderecoNumero;
-
-    @Transient
-    private String enderecoCidade;
-
-    @Transient
-    private String enderecoBairro;
-
-//    lista completa contato
-
-    @Transient
-    private String contatoNumero;
 
 }

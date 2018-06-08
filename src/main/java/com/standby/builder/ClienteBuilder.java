@@ -16,6 +16,7 @@ public class ClienteBuilder {
         cliente.setNome(dto.getNome());
         cliente.setSobrenome(dto.getSobrenome());
         cliente.setCpf(dto.getCpf());
+        cliente.setDataNascimento(dto.getDataNascimento());
 
         repository.save(cliente);
 
