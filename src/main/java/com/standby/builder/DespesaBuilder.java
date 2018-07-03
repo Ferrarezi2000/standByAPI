@@ -6,8 +6,6 @@ import com.standby.repository.DespesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
 @Component
 public class DespesaBuilder {
 
@@ -15,9 +13,15 @@ public class DespesaBuilder {
 
     public Despesa build(Despesa despesa, DespesaDTO dto) {
 
-        despesa.setData(new Date());
+        despesa.setDataVencimento(dto.getDataVencimento());
         despesa.setDescricao(dto.getDescricao());
         despesa.setValor(dto.getValor());
+
+        if (dto.getPago() == null || !dto.getPago()) {
+            despesa.setPago(false);
+        } else {
+            despesa.setPago(dto.getPago());
+        }
 
         repository.save(despesa);
 

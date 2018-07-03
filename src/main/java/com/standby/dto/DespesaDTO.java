@@ -13,6 +13,7 @@ public class DespesaDTO implements Serializable {
 
     private Long id;
     private String descricao;
-    private Date data;
+    private Date dataVencimento;
     private BigDecimal valor;
+    private Boolean pago;
 }

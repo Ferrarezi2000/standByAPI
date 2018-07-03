@@ -11,6 +11,7 @@ import com.standby.model.Servico;
 import com.standby.model.abstrato.ResponseRest;
 import com.standby.repository.DespesaRepository;
 import com.standby.repository.ServicoRepository;
+import com.standby.service.DespesaService;
 import com.standby.service.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +27,16 @@ public class DespesaController extends AbstractRestController {
 
     @Autowired private DespesaRepository repository;
     @Autowired private DespesaBuilder builder;
+    @Autowired private DespesaService despesaService;
 
     @GetMapping
     public ResponseEntity<List<Despesa>> listar() {
         return ResponseRest.list(repository.findAll());
+    }
+
+    @GetMapping("/faltarPagar")
+    public ResponseEntity<List<Despesa>> faltaPagar() {
+        return ResponseRest.list(despesaService.faltaPagar());
     }
 
     @PostMapping
@@ -38,7 +45,7 @@ public class DespesaController extends AbstractRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscar(@PathVariable("id") Despesa despesa) {
+    public ResponseEntity<?> buscar(@PathVariable("id") Despesa despesa) {
         Assert.notNull(despesa, "Despesa não encontrada.");
         return ResponseRest.object(despesa);
     }
@@ -55,5 +62,12 @@ public class DespesaController extends AbstractRestController {
         Assert.notNull(despesa, "Despesa não encontrada.");
         repository.delete(despesa);
         return ResponseRest.ok("Despesa excluída com suecesso.");
+    }
+
+    @GetMapping("/pagar/{id}")
+    public ResponseEntity<?> pagar(@PathVariable("id") Despesa despesa) {
+        Assert.notNull(despesa, "Despesa não encontrada.");
+        despesaService.pagar(despesa);
+        return ResponseRest.ok("Despesa paga com sucesso!");
     }
 }

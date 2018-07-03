@@ -23,8 +23,10 @@ public class Despesa implements Serializable {
     @NotEmpty
     private String descricao;
 
-    private Date data;
+    private Date dataVencimento;
 
     private BigDecimal valor;
+
+    private Boolean pago;
 
 }

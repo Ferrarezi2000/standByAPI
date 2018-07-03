@@ -33,7 +33,7 @@ public class DashboardService {
 
         List<Cliente> clientes = clienteRepository.findAll();
 
-        List<Despesa> despesas = despesaRepository.findAll();
+        List<Despesa> despesas = despesaRepository.findAllByPago(false);
 
         BigDecimal totalDespesas = despesas.stream().map(item -> item.getValor()).reduce(BigDecimal.ZERO, BigDecimal::add);
 
