@@ -24,6 +24,7 @@ public class ServicoBuilder {
         servico.setDataSolicitacao(new Date());
         servico.setDescricao(dto.getDescricao());
         servico.setValor(dto.getValor());
+        servico.setNumeroControle(dto.getNumeroControle());
 
         if (dto.getStatus() == null) {
             servico.setStatus("EM ANÁLISE");

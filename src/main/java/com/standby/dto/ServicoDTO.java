@@ -20,4 +20,5 @@ public class ServicoDTO implements Serializable {
     private Boolean cancelado;
     private String motivoCancelamento;
     private Boolean pago;
+    private String numeroControle;
 }

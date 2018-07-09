@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -39,5 +40,7 @@ public class Servico implements Serializable {
     private String motivoCancelamento;
 
     private Boolean pago;
+
+    private String numeroControle;
 
 }
