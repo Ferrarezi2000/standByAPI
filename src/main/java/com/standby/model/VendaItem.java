@@ -24,5 +24,9 @@ public class VendaItem implements Serializable {
 
     private String produto;
 
+    private String descricao;
+
+    private Integer quantidadeVendida;
+
     private BigDecimal valor;
 }

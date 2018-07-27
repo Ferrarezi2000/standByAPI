@@ -15,4 +15,5 @@ public class VendaDTO implements Serializable {
     private Long clienteId;
     private List<ProdutoDTO> produtos;
     private BigDecimal valor;
+    private Boolean sacado;
 }

@@ -21,15 +21,17 @@ public class ProdutoService {
 
         produtos.forEach(produto -> {
             estoques.forEach(estoque -> {
-                if (produto.equals(estoque.getProduto())) {
-                    produto.setEstoque(true);
-                } else {
-                    produto.setEstoque(false);
+                produto.setVerificado(false);
+                if (produto.getId().equals(estoque.getProduto().getId())) {
+                    if (!produto.getVerificado()) {
+                        produto.setEstoque(true);
+                        produto.setVerificado(true);
+
+                        repository.save(produto);
+                    }
                 }
             });
         });
-
         return produtos;
     }
-
 }

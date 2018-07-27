@@ -26,4 +26,6 @@ public class Venda implements Serializable {
     private Date dataVenda;
 
     private BigDecimal valor;
+
+    private Boolean sacado;
 }

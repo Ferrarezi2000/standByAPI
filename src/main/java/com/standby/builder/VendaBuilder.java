@@ -24,6 +24,7 @@ public class VendaBuilder {
         venda.setCliente(cliente);
         venda.setDataVenda(new Date());
         venda.setValor(dto.getValor());
+        venda.setSacado(false);
 
         repository.save(venda);
 
@@ -31,6 +32,8 @@ public class VendaBuilder {
             Produto produto = produtoRepository.findOne(item.getId());
             VendaItem vendaItem = new VendaItem();
             vendaItem.setProduto(item.getNome());
+            vendaItem.setDescricao(item.getDescricao());
+            vendaItem.setQuantidadeVendida(item.getQuantidadeVendida());
             vendaItem.setValor(item.getValor());
             vendaItem.setVenda(venda);
             vendaItemRepository.save(vendaItem);

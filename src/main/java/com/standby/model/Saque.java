@@ -7,31 +7,24 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-@Table(catalog = "stand_by", name = "produto")
+@Table(catalog = "stand_by", name = "saque")
 @EqualsAndHashCode
-public class Produto implements Serializable {
+public class Saque implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
-    private String nome;
-
     private String descricao;
 
+    private Date data;
+
     private BigDecimal valor;
-
-    private Boolean estoque;
-
-    @Transient
-    private Boolean verificado;
-
-    @Transient
-    private Integer quantidadeVendida;
 
 }

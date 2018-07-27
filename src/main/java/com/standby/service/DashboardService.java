@@ -1,12 +1,8 @@
 package com.standby.service;
 
-import com.standby.model.Cliente;
-import com.standby.model.Despesa;
-import com.standby.model.Servico;
+import com.standby.model.*;
 import com.standby.model.abstrato.MapBuilder;
-import com.standby.repository.ClienteRepository;
-import com.standby.repository.DespesaRepository;
-import com.standby.repository.ServicoRepository;
+import com.standby.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +16,8 @@ public class DashboardService {
     @Autowired private ServicoRepository servicoRepository;
     @Autowired private ClienteRepository clienteRepository;
     @Autowired private DespesaRepository despesaRepository;
+    @Autowired private VendaRepository vendaRepository;
+    @Autowired private SaqueRepository saqueRepository;
 
     public Map servicos() {
         List<Servico> servicosAnalise = servicoRepository.findAllByStatus("EM ANÁLISE");
@@ -27,9 +25,13 @@ public class DashboardService {
         List<Servico> servicosCancelado = servicoRepository.findAllByStatus("CANCELADO");
         List<Servico> recebido = servicoRepository.findAllByPago(true);
         List<Servico> faltaReceber = servicoRepository.findAllByPagoAndStatus(false, "CONCLUÍDO");
+        List<Venda> vendas = vendaRepository.findAllBySacado(false);
+        List<Saque> saques = saqueRepository.findAll();
 
+        BigDecimal valorTotalVendas = vendas.stream().map(item -> item.getValor()).reduce(BigDecimal.ZERO,BigDecimal::add);
         BigDecimal totalRecebido = recebido.stream().map(item->item.getValor()).reduce(BigDecimal.ZERO,BigDecimal::add);
         BigDecimal totalFaltaReceber = faltaReceber.stream().map(item->item.getValor()).reduce(BigDecimal.ZERO,BigDecimal::add);
+        BigDecimal totalSaques = saques.stream().map(item->item.getValor()).reduce(BigDecimal.ZERO,BigDecimal::add);
 
         List<Cliente> clientes = clienteRepository.findAll();
 
@@ -38,6 +40,10 @@ public class DashboardService {
         BigDecimal totalDespesas = despesas.stream().map(item -> item.getValor()).reduce(BigDecimal.ZERO, BigDecimal::add);
 
         Map retorno = MapBuilder.build()
+                .add("totalValorSaques", totalSaques)
+                .add("todasVendas", vendas.size())
+                .add("todosServicosRecebidos", recebido.size())
+                .add("valorTotalVendas", valorTotalVendas)
                 .add("totalDespesas", totalDespesas)
                 .add("totalClientes", clientes.size())
                 .add("valorTotalRecebido", totalRecebido)

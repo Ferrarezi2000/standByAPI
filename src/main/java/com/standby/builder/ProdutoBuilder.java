@@ -16,6 +16,7 @@ public class ProdutoBuilder {
         produto.setNome(dto.getNome());
         produto.setDescricao(dto.getDescricao());
         produto.setValor(dto.getValor());
+        produto.setEstoque(false);
 
         repository.save(produto);
 
